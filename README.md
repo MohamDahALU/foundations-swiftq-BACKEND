@@ -12,7 +12,7 @@ SwiftQ is a simple electronic queuing system that allows hosts to create and man
 ## 📦 Tech Stack
 
 - **Backend Framework:** Express.js
-- **Database:** SQLite (with sqlite3 npm package)
+- **Database:** MongoDB (with mongoose npm package)
 - **Other Tools:** CORS, dotenv, uuid
 
 ---
@@ -119,7 +119,7 @@ The backend will start on [http://localhost:4000](http://localhost:4000)
 
 ## 🗃️ Database Schema
 
-SQLite database includes:
+MongoDB database includes:
 
 * **queues** table: Stores queue info (id, name, created\_at)
 * **customers** table: Stores customers linked to queues (id, name, status, timestamps)
