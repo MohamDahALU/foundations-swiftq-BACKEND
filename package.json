@@ -1,7 +1,6 @@
 {
   "name": "foundations-backend",
   "version": "1.0.0",
-  "type": "module",
   "description": "SwiftQ Backend",
   "main": "index.js",
   "scripts": {
