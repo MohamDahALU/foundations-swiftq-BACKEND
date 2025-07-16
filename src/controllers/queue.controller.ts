@@ -8,7 +8,7 @@ export const createQueue = async (
 ): Promise<void> => {
   try {
     const { queueName, hostName } = req.body
-    const hostId = req.body.hostId
+    const hostId = (req as any).hostId
 
     const queueId = generateQueueId(hostName)
 
@@ -26,19 +26,18 @@ export const createQueue = async (
   }
 }
 
-// Returns all queues created by the host
 export const viewHostQueue = async (
   req: Request,
   res: Response
 ): Promise<void> => {
   try {
-    const hostId = req.params.hostId
+    const hostId = (req as any).hostId
     if (!hostId) {
       res.status(401).json({ error: 'Unauthorized' })
       return
     }
 
-    const queues = await Queue.find({ hostId, isActive: true }) // only active queues
+    const queues = await Queue.find({ hostId, isActive: true })
     res.status(200).json({ queues })
   } catch {
     res.status(500).json({ error: 'Server error' })
@@ -73,13 +72,12 @@ export const getQueueDetails = async (
 ): Promise<void> => {
   try {
     const { queueId } = req.params
-    const hostId = req.params.hostId
+    const hostId = (req as any).hostId
     if (!hostId) {
       res.status(401).json({ error: 'Unauthorized' })
       return
     }
 
-    // Ensure the queue belongs to the logged-in host
     const queue = await Queue.findOne({ queueId, hostId, isActive: true })
 
     if (!queue) {
@@ -99,7 +97,7 @@ export const deactivateQueue = async (
 ): Promise<void> => {
   try {
     const { queueId } = req.params
-    const hostId = req.params.hostId
+    const hostId = (req as any).hostId
     if (!hostId) {
       res.status(401).json({ error: 'Unauthorized' })
       return

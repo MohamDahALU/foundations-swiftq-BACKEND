@@ -1,19 +1,21 @@
 import express from 'express'
+const router = express.Router()
+
+// Import your middleware and controllers
+import { verifyToken } from '../middleware/auth.middleware'
 import {
   createQueue,
-  getQueueAnalytics,
   viewHostQueue,
   getQueueDetails,
   deactivateQueue,
+  getQueueAnalytics,
 } from '../controllers/queue.controller'
-import { verifyToken } from '../middleware/auth.middleware'
 
-const router = express.Router()
-
-router.post('/', verifyToken, createQueue)
-router.get('/:queueId', verifyToken, getQueueDetails) // view one queue + customers
-router.get('/host/view', verifyToken, viewHostQueue)
-router.delete('/:queueId', verifyToken, deactivateQueue) // deactivate queue
-router.get('/:queueId/analytics', verifyToken, getQueueAnalytics) // analytics
+// Type the routes properly
+router.post('/create', verifyToken as any, createQueue)
+router.get('/host', verifyToken as any, viewHostQueue)
+router.get('/:queueId/details', verifyToken as any, getQueueDetails)
+router.patch('/:queueId/deactivate', verifyToken as any, deactivateQueue)
+router.get('/:queueId/analytics', verifyToken as any, getQueueAnalytics)
 
 export default router

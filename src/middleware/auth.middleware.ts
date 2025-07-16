@@ -1,10 +1,5 @@
-// src/middleware/auth.middleware.ts
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
-
-interface AuthenticatedRequest extends Request {
-  hostId?: string
-}
 
 export const verifyToken = (
   req: Request,
@@ -19,7 +14,8 @@ export const verifyToken = (
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: string }
-    ;(req as AuthenticatedRequest).hostId = decoded.id
+    // Type assertion to add hostId property
+    ;(req as any).hostId = decoded.id
     next()
   } catch (error) {
     console.error('JWT error:', error)
