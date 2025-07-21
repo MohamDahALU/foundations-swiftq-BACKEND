@@ -135,8 +135,9 @@ MongoDB database includes:
 
 ## 🔗 Project Links
 
-* **Frontend Repo:** (Coming soon)
-* **Deployment:** (Coming soon)
+
+* ** Backend Deployment:** https://foundations-swiftq-backend.onrender.com
+* **API Documentations:** https://documenter.getpostman.com/view/24266161/2sB34kFepV
 
 ---
 
